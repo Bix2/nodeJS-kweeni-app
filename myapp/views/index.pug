@@ -1,5 +1,50 @@
 extends layout
-
+block vars
+  - var bodyClass = 'homepage';
 block content
-  h1= title
-  p Welcome to #{title}
+  header
+    nav
+      a.logo
+        img.logo(src='/images/logo-xl.svg', alt='Kweeni logo')
+      a.btn.btn--primary.btn--login Inloggen
+    .intro
+      h1 Eerste hulp 🚑 bij 🎨 design & ☕ development hoofdpijn. Kweeni hoe handig.
+      .user.user1
+      .user.user2
+      .user.user3
+      .user.user4
+      .user.user5
+      .user.user6
+      .user.user7
+      .user.user8
+      .user.user9
+      .user.user10
+      .user.user11
+      .user.user12
+  main
+    section.features
+      .feature.feature1
+        .feature__header
+          img(src='/images/icon-cool.svg', alt='cool emoji')
+          h2 SAMEN SLIMMER
+        .feature__text
+          p Iedereen kan een nieuw SWEENI-topic aanmaken en de link delen.
+          p Daarna kunnen vragen gesteld worden tijdens lessen, demo's, ...
+      .feature.feature2
+        .feature__header
+          img(src='/images/icon-love.svg', alt='love emoji')
+          h2 KWEENI COINS
+        .feature__text
+          p
+            | Verdien KWEENI coins door anderen te helpen. Met je KWEENI coins kan je andere bedanken die je helpen.
+          p Da's kweeni hoe handig.
+      .feature.feature3
+        .feature__header
+          img(src='/images/icon-rainbow.svg', alt='rainbow emoji')
+          h2 MADE BY IMD
+        .feature__text
+          p
+            | Een project van 
+            a(href='#') #weareimd
+            |  en 
+            a(href='#') GoodBytes
