@@ -4,6 +4,23 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+
+// mongoose
+mongoose.connect('mongodb+srv://WebtechProject:kweeni123@clustermongo-jm8tv.mongodb.net/', {dbName: "kweeni"});
+var connection = mongoose.connection;
+
+
+connection.on('error', console.error.bind(console, 'connection error:'));
+connection.once('open', function(){
+  console.log('Successfully connected');
+  // show collections of database
+  connection.db.listCollections().toArray(function(err, names){
+    console.log(names)
+  })
+});
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
