@@ -20,16 +20,18 @@ router.get('/login/facebook/return',
   })
 
 /* GET kweeni page. */
-router.get('/kweeni', function(req, res, next) {
+router.get('/kweeni', isLoggedIn, function(req, res, next) {
   res.render('kweeni', { 
     title: 'Kweeni',
-    user: req.user 
+    user: req.user.id,
+    username: req.user.name,
+    avatar: req.user.avatar
   });
 });
 
 /* GET details page. */
 router.get('/kweeni/:id', function(req, res, next) {
-  console.log('Request Id:', req.params.id);
+  console.log('id:', req.params.id);
 });
 
 // route for logging out
@@ -37,5 +39,11 @@ router.get('/users/logout', function(req, res) {
   req.logout();
   res.redirect('/');
 });
+
+// route to make sure a user is logged in
+function isLoggedIn(req, res, next) {
+  if (req.isAuthenticated()) return next();
+  res.redirect('/');
+}
 
 module.exports = router;
