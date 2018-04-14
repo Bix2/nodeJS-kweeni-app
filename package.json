@@ -14,6 +14,7 @@
     "http-errors": "~1.6.2",
     "mongoose": "^5.0.14",
     "morgan": "~1.9.0",
+    "passport": "^0.4.0",
     "passport-facebook": "^2.1.1",
     "primus": "^7.1.1",
     "pug": "2.0.0-beta11",
