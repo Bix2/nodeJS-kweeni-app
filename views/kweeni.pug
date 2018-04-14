@@ -7,11 +7,11 @@ block content
 					img#logo(src='/images/logo.svg', alt='logo_KWEENI')
 			.nav__user
 				.nav__user__text
-					p Bibi
+					p=username
 					a(href='/users/logout') Log uit
 				.nav__user__avatar
-					img(src='/images/user12.png', alt='user')
-			input#uid(type='hidden', value='')
+					img(src=avatar, alt='user')
+			input#uid(type='hidden', value=user)
 		.hero
 			h1.hero__title Iets kweeni hoe moeilijk? Stel hier je vraag.
 			form.hero__form(method='post', action='/kweeni')
