@@ -1,13 +1,13 @@
 /*  ######                          #######
-    ######      GLOBAL STYLING      #######  */
+  ######      GLOBAL STYLING      #######  */
 
 :root {
-    --color_darkgray: #494E61;
-    --color_lightgray: #DCDCDC;
-    --color_blue: #3b1cff;
-    --color_blue--focus: #674fff;
-    --color_red: #FA5B33;
-    --color_red--focus: #EE9D9D;
+  --color_darkgray: #494E61;
+  --color_lightgray: #DCDCDC;
+  --color_blue: #3b1cff;
+  --color_blue--focus: #674fff;
+  --color_red: #FA5B33;
+  --color_red--focus: #EE9D9D;
 }
 
 * {
@@ -204,7 +204,6 @@ h1, h2, h3, h4 {
     display: grid;
   }
   
-  
   .feature__header img {
     width: 70px;
   }
@@ -222,13 +221,11 @@ h1, h2, h3, h4 {
   }
   
   .feature1 {
-    align-self: start;
     grid-row: 2 / span 3;
     grid-column: 1 / span 1;
   }
   
   .feature2 {
-    align-self: end;
     grid-row: 1 / span 3;
     grid-column: 2 / span 1;
   }
@@ -670,13 +667,13 @@ h1, h2, h3, h4 {
 }
 
 @media( max-width: 1200px ){
-    .questionAnswers {
-        padding: 0 2em;
-    }
+  .questionAnswers {
+      padding: 0 2em;
+  }
 }
 
 @media( max-width:  700px){
-    .questionDetails footer {
-        grid-template-columns: 1fr;
-    }
+  .questionDetails footer {
+      grid-template-columns: 1fr;
+  }
 }
