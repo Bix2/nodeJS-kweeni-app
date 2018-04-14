@@ -1,41 +1,40 @@
 extends layout
-block vars
-  - var bodyClass = 'kweeni';
 block content
-	nav.nav
-		.nav__logo
-			a(href='/')
-				img#logo(src='/images/logo.svg', alt='logo_KWEENI')
-		.nav__user
-			.nav__user__text
-				p Bibi
-				a(href='/users/logout') Log uit
-			.nav__user__avatar
-				img(src='/images/user12.png', alt='user')
-		input#uid(type='hidden', value='')
-    .hero
-		h1.hero__title Iets kweeni hoe moeilijk? Stel hier je vraag.
-		form.hero__form(method='post', action='/kweeni')
-			input.hero__form__input(type='text', name='hero__form__input', placeholder='Stel hier je vraag')
-			input#hero__form__button.btn.btn--primary(type='submit', value='Nu vragen')
-	.topics
-		h2 Hot topics!
-		.topic.topic--first
-			.topic__likes
-				img(src='/images/icon-cool.svg', alt='icon')
-				span 
-			.topic__title
-				a(href='/kweeni/:id') 
-			.topic__author
-				p.author__name 
-				img.author__avatar(src='/images/user1.png', alt='avatar')
-		.topic
-			.topic__likes
-				img(src='/images/icon-cool.svg', alt='icon')
-				span 
-			.topic__title
-				a(href='/kweeni/:id') 
-			.topic__author
-				p.author__name 
-				img.author__avatar(src='/images/user2.png', alt='avatar')
-		a.topics__more__link(href='') Toon 10 extra topics
+	.kweeni
+		nav.nav
+			.nav__logo
+				a(href='/')
+					img#logo(src='/images/logo.svg', alt='logo_KWEENI')
+			.nav__user
+				.nav__user__text
+					p Bibi
+					a(href='/users/logout') Log uit
+				.nav__user__avatar
+					img(src='/images/user12.png', alt='user')
+			input#uid(type='hidden', value='')
+		.hero
+			h1.hero__title Iets kweeni hoe moeilijk? Stel hier je vraag.
+			form.hero__form(method='post', action='/kweeni')
+				input.hero__form__input(type='text', name='hero__form__input', placeholder='Stel hier je vraag')
+				input#hero__form__button.btn.btn--primary(type='submit', value='Nu vragen')
+		.topics
+			h2 Hot topics!
+			.topic.topic--first
+				.topic__likes
+					img(src='/images/icon-cool.svg', alt='icon')
+					span 
+				.topic__title
+					a(href='/kweeni/:id') 
+				.topic__author
+					p.author__name 
+					img.author__avatar(src='/images/user1.png', alt='avatar')
+			.topic
+				.topic__likes
+					img(src='/images/icon-cool.svg', alt='icon')
+					span 
+				.topic__title
+					a(href='/kweeni/:id') 
+				.topic__author
+					p.author__name 
+					img.author__avatar(src='/images/user2.png', alt='avatar')
+			a.topics__more__link(href='') Toon 10 extra topics

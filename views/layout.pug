@@ -5,9 +5,7 @@ html
     link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i|Slabo+13px|Ultra')
     link(href='/stylesheets/normalize.css', rel='stylesheet')
     link(rel='stylesheet', href='/stylesheets/style.css')
-  - var class='';
-  block vars
-  body(class='#{bodyClass}')
+  body
     block content
     script(src="/javascripts/jquery.min.js")
     script(src="/javascripts/primus.js")
