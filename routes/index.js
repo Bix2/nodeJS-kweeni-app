@@ -1,6 +1,52 @@
 var express = require('express');
 var passport = require('passport');
 var router = express.Router();
+var Strategy = require('passport-facebook').Strategy;
+var Users = require('../models/User');
+
+// configure the Facebook strategy for use by Passport
+passport.use(new Strategy({
+  clientID: '226457874572897',
+  clientSecret: 'bec4b902be325e182532a48530533072',
+  //callbackURL: 'https://8992a753.ngrok.io/login/facebook/return',
+  callbackURL: 'https://kweeni-app-imd.herokuapp.com/login/facebook/return',
+  profileFields: ['id','displayName', 'photos'],
+}, 
+// function must invoke `cb` with a user object, which will be set at `req.user` in route handlers
+function(accessToken, refreshToken, profile, cb) {
+    Users.findOne({'id': profile.id}, function(err, user) {
+      if (err) 
+        return cb(err);
+      if (user) {
+        return cb(null, user);
+      } else {
+        var user = new Users();
+        user.id = profile.id;
+        user.name = profile.displayName;
+        user.avatar = profile.photos[0].value;
+        user.save(function(err) {
+          if (err)
+            throw err;
+          return cb(null, profile)
+        })
+      }
+    })
+}));
+
+// configure Passport authenticated session persistence
+// serialize users into and deserialize out of the session to restore authentication state across HTTP requests
+
+// supply the user ID when serializing
+passport.serializeUser(function(user, cb) {
+  cb(null, user.id);
+});
+
+// querying the user record by ID when deserializing
+passport.deserializeUser(function(id, cb) {
+  Users.findOne({'id': profile.id}, function(err, user) {
+    cb(err, user);
+  });
+});
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -19,13 +65,19 @@ router.get('/login/facebook/return',
     res.redirect('/kweeni');
   })
 
+/* route to make sure a user is logged in
+function isLoggedIn(req, res, next) {
+  if (req.user) return next();
+  res.redirect('/');
+}*/
+
 /* GET kweeni page. */
-router.get('/kweeni', isLoggedIn, function(req, res, next) {
+router.get('/kweeni', function(req, res, next) {
+  //console.log(req.profile);
+  //console.log(req.user);
   res.render('kweeni', { 
     title: 'Kweeni',
-    user: req.user.id,
-    username: req.user.name,
-    avatar: req.user.avatar
+    user: req.user
   });
 });
 
@@ -40,10 +92,6 @@ router.get('/users/logout', function(req, res) {
   res.redirect('/');
 });
 
-// route to make sure a user is logged in
-function isLoggedIn(req, res, next) {
-  if (req.isAuthenticated()) return next();
-  res.redirect('/');
-}
+
 
 module.exports = router;
