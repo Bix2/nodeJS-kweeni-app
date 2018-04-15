@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const Comment = new Schema({
     text: String,
-    author: { 
+    postedBy: { 
         type: Schema.Types.ObjectId, 
         ref: 'Users' 
     }
@@ -12,7 +12,7 @@ const Comment = new Schema({
 const Reply = new Schema({
     text: String,
     comments: [Comment],
-    user: { 
+    postedBy: { 
         type: Schema.Types.ObjectId, 
         ref: 'Users' 
     }
@@ -22,7 +22,7 @@ const topicSchema = new Schema({
     title: String,
     date: Date,
     votes: [{
-        user: {
+        votedBy: {
             type: Schema.Types.ObjectId, 
             ref: 'Users' 
         }
