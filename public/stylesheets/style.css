@@ -238,16 +238,16 @@ h1, h2, h3, h4 {
   }
   
   @media (max-width: 1024px){
-      body {
-        font-size: 0.8em;
-      }
-  
       .intro h1 {
         padding: 1em;
       }
   }
   
   @media (max-width: 800px){
+      body {
+        font-size: 0.8em;
+      }
+
       .features {
         grid-template-columns: 1fr;
       }
@@ -418,6 +418,7 @@ h1, h2, h3, h4 {
   font-family: 'Slabo 13px';
   color: var(--darkgray);
   font-size: 1em;
+  font-size: 16px;
 }
 
 .topic__author {

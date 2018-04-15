@@ -81,7 +81,7 @@ router.get('/kweeni', isLoggedIn, function(req, res, next) {
   .exec(function (err, topics) {
   if (err) { return next(err); }
   //Successful, so render
-  console.log(topics);
+  console.log('this is the list of all topics', topics);  // GOOD
   res.render('kweeni', {
       title: 'Kweeni',
       userId: req.user._id,
@@ -93,6 +93,26 @@ router.get('/kweeni', isLoggedIn, function(req, res, next) {
   });
 })
 
+// GET request for one topic
+router.get('/kweeni/:id', function(req, res, next) {
+  Topic.findById({id: req.params.id})
+        .populate('author')
+        .exec(function(err, topic) {
+          console.log('this is one topic returned', topic);  // UNDEFINED
+            if (err) { return next(err); }
+            if (topic == null) {
+                var err = new Error('Topic not found');
+                err.status = 404;
+                return next(err);
+            }
+            res.render('detail', {
+                topic: topic,
+                topicId: topic.id,
+                userId: req.user._id
+            })
+        });
+})
+
 // POST request for creating a topic
 router.post('/kweeni', function(req, res, next) {    
   var topic = new Topic({
@@ -102,26 +122,10 @@ router.post('/kweeni', function(req, res, next) {
   });
   topic.save(function(err){
       if (err) { return next(err); }
-      res.redirect('/kweeni/:id');
-  })
-})
+      console.log('this is the id of the topic saved in db', topic.id);   // GOOD
+      res.redirect('/kweeni/'+topic.id);
 
-// GET request for one topic
-router.get('kweeni/:id', function(req, res, next) {
-  Topic.findById({id: req.params.id})
-        .populate('author')
-        .exec(function(err, topic) {
-          console.log(topic);
-            if (err) { return next(err); }
-            if (topic == null) {
-                var err = new Error('Topic not found');
-                err.status = 404;
-                return next(err);
-            }
-            res.render('kweeni_id', {
-                topic: topic
-            })
-        });
+  })
 })
 
 /*
