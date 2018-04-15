@@ -2,39 +2,39 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const Comment = new Schema({
-    body: String,
+    text: String,
     author: { 
         type: Schema.Types.ObjectId, 
-        ref: 'User' 
+        ref: 'Users' 
     }
 });
 
 const Reply = new Schema({
-    body: String,
+    text: String,
     comments: [Comment],
-    author: { 
+    user: { 
         type: Schema.Types.ObjectId, 
-        ref: 'User' 
+        ref: 'Users' 
     }
 });
 
 const topicSchema = new Schema({
-    body: String,
+    title: String,
     date: Date,
     votes: [{
-        author: {
+        user: {
             type: Schema.Types.ObjectId, 
-            ref: 'User' 
+            ref: 'Users' 
         }
     }],
     replies: [Reply],
     author: { 
         type: Schema.Types.ObjectId, 
-        ref: 'User',
+        ref: 'Users',
     },
 });
 
 
-const Topic = mongoose.model('Topic', topicSchema);
+const Topic = mongoose.model('Topics', topicSchema);
 
 module.exports = Topic;
