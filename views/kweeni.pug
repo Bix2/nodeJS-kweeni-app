@@ -7,11 +7,11 @@ block content
 					img#logo(src='/images/logo.svg', alt='logo_KWEENI')
 			.nav__user
 				.nav__user__text
-					p=username
-					a(href='/users/logout') Log uit
+					p= username
+					a(href='/logout') Log uit
 				.nav__user__avatar
-					img(src=avatar, alt='user')
-			input#uid(type='hidden', value=user)
+					img(src= avatar, alt='user')
+		input#userId(type='hidden', value= userId)
 		.hero
 			h1.hero__title Iets kweeni hoe moeilijk? Stel hier je vraag.
 			form.hero__form(method='post', action='/kweeni')
@@ -19,22 +19,13 @@ block content
 				input#hero__form__button.btn.btn--primary(type='submit', value='Nu vragen')
 		.topics
 			h2 Hot topics!
-			.topic.topic--first
-				.topic__likes
-					img(src='/images/icon-cool.svg', alt='icon')
-					span 
-				.topic__title
-					a(href='/kweeni/:id') 
-				.topic__author
-					p.author__name 
-					img.author__avatar(src='/images/user1.png', alt='avatar')
-			.topic
-				.topic__likes
-					img(src='/images/icon-cool.svg', alt='icon')
-					span 
-				.topic__title
-					a(href='/kweeni/:id') 
-				.topic__author
-					p.author__name 
-					img.author__avatar(src='/images/user2.png', alt='avatar')
-			a.topics__more__link(href='') Toon 10 extra topics
+			each topic in topic_list
+				.topic
+					.topic__likes
+						img(src='/images/icon-cool.svg', alt='icon')
+						span
+					.topic__title
+						a(href= "/kweeni/"+topic.id) #{topic.title}
+					.topic__author
+						p.author__name 
+						img.author__avatar(src='', alt='avatar')
