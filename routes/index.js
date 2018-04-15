@@ -9,8 +9,8 @@ var User = require('../models/User');
 passport.use(new Strategy({
   clientID: '226457874572897',
   clientSecret: 'bec4b902be325e182532a48530533072',
-  callbackURL: 'https://6b6205af.ngrok.io/login/facebook/return',
-  //callbackURL: 'https://kweeni-app-imd.herokuapp.com/login/facebook/return',
+  //callbackURL: 'https://6b6205af.ngrok.io/login/facebook/return',
+  callbackURL: 'https://kweeni-app-imd.herokuapp.com/login/facebook/return',
   profileFields: ['id','displayName', 'photos'],
 }, 
 // function must invoke `cb` with a user object, which will be set at `req.user` in route handlers
@@ -97,18 +97,17 @@ router.post('/kweeni', function(req, res, next) {
   var topic = new Topic({
     title: req.body.hero__form__input,
     date: Date.now(),
-    author: user._id
+    author: req.user._id
   });
   topic.save(function(err){
       if (err) { return next(err); }
-      var url = id;
-      res.redirect(topic.url);
+      res.redirect('/kweeni/:id');
   })
 })
 
 // GET request for one topic
 router.get('kweeni/:id', function(req, res, next) {
-  var topicId = req.params.id;
+  id: req.params.id;
   Topic.findById()
         .populate('author')
         .exec(function(err, topic) {
