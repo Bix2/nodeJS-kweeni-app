@@ -9,7 +9,7 @@ var User = require('../models/User');
 passport.use(new Strategy({
   clientID: '226457874572897',
   clientSecret: 'bec4b902be325e182532a48530533072',
-  //callbackURL: 'https://6b6205af.ngrok.io/login/facebook/return',
+  //callbackURL: 'https://34233c0c.ngrok.io/login/facebook/return',
   callbackURL: 'https://kweeni-app-imd.herokuapp.com/login/facebook/return',
   profileFields: ['id','displayName', 'photos'],
 }, 
@@ -21,14 +21,14 @@ function(accessToken, refreshToken, profile, cb) {
       if (user) {
         return cb(null, user);
       } else {
-        var newUser = new User();
-        newUser.id = profile.id;
-        newUser.name = profile.displayName;
-        newUser.avatar = profile.photos[0].value;
-        newUser.save(function(err) {
+        var user = new User();
+        user.id = profile.id;
+        user.name = profile.displayName;
+        user.avatar = profile.photos[0].value;
+        user.save(function(err) {
           if (err)
             throw err;
-          return cb(null, newUser)
+          return cb(null, user)
         })
       }
     })
@@ -84,7 +84,8 @@ router.get('/kweeni', isLoggedIn, function(req, res, next) {
   console.log(topics);
   res.render('kweeni', {
       title: 'Kweeni',
-      userId: req.user.id,
+      userId: req.user._id,
+      facebookId: req.user.id,
       username: req.user.name,
       avatar: req.user.avatar,
       topic_list: topics 
@@ -107,10 +108,10 @@ router.post('/kweeni', function(req, res, next) {
 
 // GET request for one topic
 router.get('kweeni/:id', function(req, res, next) {
-  id: req.params.id;
-  Topic.findById()
+  Topic.findById({id: req.params.id})
         .populate('author')
         .exec(function(err, topic) {
+          console.log(topic);
             if (err) { return next(err); }
             if (topic == null) {
                 var err = new Error('Topic not found');

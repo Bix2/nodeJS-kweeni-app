@@ -27,5 +27,5 @@ block content
 					.topic__title
 						a(href= "/kweeni/"+topic.id) #{topic.title}
 					.topic__author
-						p.author__name 
-						img.author__avatar(src='', alt='avatar')
+						p.author__name #{topic.author.name}
+						img.author__avatar(src= topic.author.avatar, alt='avatar')
