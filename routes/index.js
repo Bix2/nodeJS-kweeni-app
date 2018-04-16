@@ -1,6 +1,7 @@
 var express = require('express');
 var passport = require('passport');
 var router = express.Router();
+const mongoose = require('mongoose');
 var Strategy = require('passport-facebook').Strategy;
 var Topic = require('../models/Topic');
 var User = require('../models/User');
@@ -9,7 +10,7 @@ var User = require('../models/User');
 passport.use(new Strategy({
   clientID: '226457874572897',
   clientSecret: 'bec4b902be325e182532a48530533072',
-  //callbackURL: 'https://34233c0c.ngrok.io/login/facebook/return',
+  //callbackURL: 'https://6cf64499.ngrok.io/login/facebook/return',
   callbackURL: 'https://kweeni-app-imd.herokuapp.com/login/facebook/return',
   profileFields: ['id','displayName', 'photos'],
 }, 
@@ -95,7 +96,8 @@ router.get('/kweeni', isLoggedIn, function(req, res, next) {
 
 // GET request for one topic
 router.get('/kweeni/:id', function(req, res, next) {
-  Topic.findById({id: req.params.id})
+  var _id = mongoose.Types.ObjectId(req.params.id);
+  Topic.findById({_id})
         .populate('author')
         .exec(function(err, topic) {
           console.log('this is one topic returned', topic);  // UNDEFINED
@@ -108,7 +110,9 @@ router.get('/kweeni/:id', function(req, res, next) {
             res.render('detail', {
                 topic: topic,
                 topicId: topic.id,
-                userId: req.user._id
+                userId: req.user._id,
+                username: req.user.name,
+                avatar: req.user.avatar,
             })
         });
 })
