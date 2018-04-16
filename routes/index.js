@@ -5,6 +5,8 @@ const mongoose = require('mongoose');
 var Strategy = require('passport-facebook').Strategy;
 var Topic = require('../models/Topic');
 var User = require('../models/User');
+var moment = require('moment');
+require('moment/locale/cs');
 
 // configure the Facebook strategy for use by Passport
 passport.use(new Strategy({
@@ -110,6 +112,7 @@ router.get('/kweeni/:id', function(req, res, next) {
             res.render('detail', {
                 topic: topic,
                 topicId: topic.id,
+                topicDate: moment(topic.date).locale('nl').startOf().fromNow(),
                 userId: req.user._id,
                 username: req.user.name,
                 avatar: req.user.avatar,
