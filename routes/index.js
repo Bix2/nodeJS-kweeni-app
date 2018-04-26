@@ -6,14 +6,15 @@ var Strategy = require('passport-facebook').Strategy;
 var Topic = require('../models/Topic');
 var User = require('../models/User');
 var moment = require('moment');
+var slugify = require('slugify');
 require('moment/locale/cs');
 
 // configure the Facebook strategy for use by Passport
 passport.use(new Strategy({
   clientID: '226457874572897',
   clientSecret: 'bec4b902be325e182532a48530533072',
-  //callbackURL: 'https://6cf64499.ngrok.io/login/facebook/return',
-  callbackURL: 'https://kweeni-app-imd.herokuapp.com/login/facebook/return',
+  callbackURL: 'https://da5897f9.ngrok.io/login/facebook/return',
+  //callbackURL: 'https://kweeni-app-imd.herokuapp.com/login/facebook/return',
   profileFields: ['id','displayName', 'photos'],
 }, 
 // function must invoke `cb` with a user object, which will be set at `req.user` in route handlers
@@ -97,9 +98,9 @@ router.get('/kweeni', isLoggedIn, function(req, res, next) {
 })
 
 // GET request for one topic
-router.get('/kweeni/:id', function(req, res, next) {
-  var _id = mongoose.Types.ObjectId(req.params.id);
-  Topic.findById({_id})
+router.get('/kweeni/:slug', function(req, res, next) {
+  //var _id = mongoose.Types.ObjectId(req.params.id);
+  Topic.findOne({"slug" : req.params.slug})
         .populate('author')
         .exec(function(err, topic) {
           console.log('this is one topic returned', topic);  // UNDEFINED
@@ -124,13 +125,18 @@ router.get('/kweeni/:id', function(req, res, next) {
 router.post('/kweeni', function(req, res, next) {    
   var topic = new Topic({
     title: req.body.hero__form__input,
+    slug: slugify(req.body.hero__form__input, {
+      replacement: '-',    // replace spaces with replacement
+      remove: null,        // regex to remove characters
+      lower: true          // result in lower case
+    }),
     date: Date.now(),
     author: req.user._id
   });
   topic.save(function(err){
       if (err) { return next(err); }
       console.log('this is the id of the topic saved in db', topic.id);   // GOOD
-      res.redirect('/kweeni/'+topic.id);
+      res.redirect('/kweeni/'+topic.slug);
 
   })
 })

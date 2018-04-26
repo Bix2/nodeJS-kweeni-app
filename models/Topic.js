@@ -20,6 +20,7 @@ const Reply = new Schema({
 
 const topicSchema = new Schema({
     title: String,
+    slug: String,
     date: Date,
     votes: [{
         votedBy: {
