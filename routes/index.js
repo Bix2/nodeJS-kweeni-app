@@ -13,8 +13,8 @@ require('moment/locale/cs');
 passport.use(new Strategy({
   clientID: '226457874572897',
   clientSecret: 'bec4b902be325e182532a48530533072',
-  callbackURL: 'https://da5897f9.ngrok.io/login/facebook/return',
-  //callbackURL: 'https://kweeni-app-imd.herokuapp.com/login/facebook/return',
+  //callbackURL: 'https://da5897f9.ngrok.io/login/facebook/return',
+  callbackURL: 'https://kweeni-app-imd.herokuapp.com/login/facebook/return',
   profileFields: ['id','displayName', 'photos'],
 }, 
 // function must invoke `cb` with a user object, which will be set at `req.user` in route handlers
