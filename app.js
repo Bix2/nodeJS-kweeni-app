@@ -35,7 +35,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
-app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
+app.use(require('express-session')({ 
+  secret: 'keyboard cat', 
+  cookie: {
+    maxAge: 40 * 24 * 60 * 60 * 1000
+  },
+  resave: true, 
+  saveUninitialized: true }));
 
 // initialize Passport and restore authentication state
 app.use(passport.initialize());
