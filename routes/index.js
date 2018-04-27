@@ -80,7 +80,7 @@ function isLoggedIn(req, res, next) {
 
 // GET request for list of all topics
 router.get('/kweeni', isLoggedIn, function(req, res, next) {
-  Topic.find({}, 'title author')
+  Topic.find({}, 'title author slug')
   .populate('author')
   .exec(function (err, topics) {
   if (err) { return next(err); }
@@ -92,15 +92,15 @@ router.get('/kweeni', isLoggedIn, function(req, res, next) {
       facebookId: req.user.id,
       username: req.user.name,
       avatar: req.user.avatar,
-      topic_list: topics 
+      topic_list: topics
     });
   });
 })
 
 // GET request for one topic
-router.get('/kweeni/:slug', function(req, res, next) {
+router.get('/kweeni/:question', function(req, res, next) {
   //var _id = mongoose.Types.ObjectId(req.params.id);
-  Topic.findOne({"slug" : req.params.slug})
+  Topic.findOne({slug: req.params.question})
         .populate('author')
         .exec(function(err, topic) {
           console.log('this is one topic returned', topic);  // UNDEFINED
@@ -112,7 +112,6 @@ router.get('/kweeni/:slug', function(req, res, next) {
             }
             res.render('detail', {
                 topic: topic,
-                topicId: topic.id,
                 topicDate: moment(topic.date).locale('nl').startOf().fromNow(),
                 userId: req.user._id,
                 username: req.user.name,
@@ -137,7 +136,6 @@ router.post('/kweeni', function(req, res, next) {
       if (err) { return next(err); }
       console.log('this is the id of the topic saved in db', topic.id);   // GOOD
       res.redirect('/kweeni/'+topic.slug);
-
   })
 })
 
