@@ -1,0 +1,35 @@
+.nav {
+    background-color: $color-darkgray;
+    display: grid;
+    grid-template-columns: repeat(2, minmax( 200px, 500px ));
+    align-items: center;
+    padding: 0.5em 1em;
+    justify-content: center;
+}
+
+.nav a {
+  color: var(--color_red--focus);
+}
+
+.nav__user {
+  display: grid;
+  grid-gap: 1em;
+  align-items: center;
+  grid-template-columns: 1fr 40px;
+  color: #99A0BB;
+  justify-self: end;
+  text-align: right;
+}
+
+.nav__user__text {
+  font-size: 0.8em;
+}
+
+.nav__user__text p {
+  margin: 0 0 0.2em 0;
+}
+
+.nav__user__avatar img {
+  max-width: 100%;
+  border-radius: 8px;
+}

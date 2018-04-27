@@ -1,0 +1,77 @@
+$color-darkgray: #494E61; 
+$color-lightgray: #DCDCDC;
+$color-blue: #3b1cff;
+$color-lightblue: #674fff;
+$color-red: #FA5B33;
+$color-lightred: #EE9D9D;
+
+$font-slabo: 'Slabo 13px', serif;
+$font-ultra: 'Ultra', serif;
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+}
+
+body {
+    font-family: 'Slabo 13px', serif;
+    font-size: 1em;
+    color: $color-darkgray;
+}
+
+h1, h2, h3, h4 {
+    font-family: 'Ultra', serif;
+    margin: 0;
+}
+
+.btn {
+    outline: none;
+    cursor: pointer;
+    background-color: $color-darkgray;
+    color: white;
+    display: inline-block;
+    padding: 1em 2em;
+    text-decoration: none;
+    border-radius: 4px;
+    border-bottom: 2px solid transparent;
+    transition: border 0.02s ease-in;
+    font-family: Ultra;
+    font-size: 1.1em;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.btn:active {
+    transform: translateY(2px);
+}
+
+.btn--primary {
+    background-color: $color-blue;
+}
+
+.btn--primary:hover {
+    background-color: $color-lightblue;
+}
+
+@mixin small() {
+    @media only screen and (max-width: 43em) {
+        @content;
+    }
+}
+
+@mixin medium() {
+    @media only screen and (max-width: 64em) {
+        @content;
+    }
+}
+
+@mixin large() {
+    @media only screen and (max-width: 75em) {
+        @content;
+    }
+}
+

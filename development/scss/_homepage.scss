@@ -1,0 +1,218 @@
+
+/* ### HEADER ### */
+
+.homepage header {
+    background-color: $color-lightgray;
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.homepage nav {
+    max-width: 1000px;
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    align-items: center;
+    padding: 0.8em;
+    justify-self: center;
+}
+
+.homepage .logo {
+    justify-self: start;
+}
+
+.homepage .logo img {
+    max-width: 80%;
+}
+
+/* ### INTRO ### */
+
+.intro {
+    display: grid;
+    grid-template-columns: repeat(10, minmax(50px, 100px));
+    grid-template-rows: repeat(5, minmax(50px, 100px));
+    justify-self: center;
+    padding-top: 1em;
+}
+
+.user {
+    background-size: cover;
+}
+
+.intro h1 {
+    grid-column: 1 / 6;
+    grid-row: 1 / span 2;
+    font-family: $font-slabo;
+    font-weight: normal;
+    font-size: 2.2em;
+    line-height: 1.3em;
+}
+
+.user1 {
+    background-image: url(https://image.ibb.co/iYA3kx/user1.png);
+    grid-column: 6 / span 1;
+    grid-row: 2 / span 1;
+}
+
+.user2 {
+    background-image: url(https://image.ibb.co/gMDOkx/user2.png);
+    grid-column: 9 / span 1;
+    grid-row: 2 / span 1;
+}
+
+.user3 {
+    background-image: url(https://image.ibb.co/bUYOkx/user3.png);
+    grid-column: 1 / span 1;
+    grid-row: 3 / span 1;
+}
+
+.user4 {
+    background-image: url(https://image.ibb.co/e5iZsc/user4.png);
+    grid-column: 3 / span 1;
+    grid-row: 3 / span 1;
+}
+
+.user5 {
+    background-image: url(https://image.ibb.co/eNTOkx/user5.png);
+    grid-column: 4 / span 2;
+    grid-row: 3 / span 2;
+}
+
+.user6 {
+    background-image: url(https://image.ibb.co/daDCdH/user6.png);
+    grid-column: 7 / span 1;
+    grid-row: 3 / span 1;
+}
+
+.user7 {
+    background-image: url(https://image.ibb.co/bKqsdH/user7.png);
+    grid-column: 9 / span 1;
+    grid-row: 3 / span 1;
+}
+
+.user8 {
+    background-image: url(https://image.ibb.co/fB53kx/user8.png);
+    grid-column: 10 / span 1;
+    grid-row: 3 / span 1;
+}
+
+.user9 {
+    background-image: url(https://image.ibb.co/czxG5x/user9.png);
+    grid-column: 2 / span 1;
+    grid-row: 4 / span 1;
+}
+
+.user10 {
+    background-image: url(https://image.ibb.co/d9AEsc/user10.png);
+    grid-column: 7 / span 2;
+    grid-row: 4 / span 2;
+}
+
+.user11 {
+    background-image: url(https://image.ibb.co/eCfEsc/user11.png);
+    grid-column: 9 / span 1;
+    grid-row: 4 / span 1;
+}
+
+.user12 {
+    background-image: url(https://image.ibb.co/dfwb5x/user12.png);
+    grid-column: 3 / span 1;
+    grid-row: 5 / span 1;
+}
+
+/* ### FEATURES ### */
+
+.homepage main {
+    display: grid;
+    justify-items: center;
+}
+
+.features {
+    display: grid;
+    grid-gap: 20px;
+    justify-content: center;
+    grid-template-rows: repeat(3, 1fr);
+    max-width: 1000px;
+    margin-top: 2em;
+}
+
+.feature {
+    padding: 0 1em;
+    display: grid;
+}
+
+.feature__header img {
+    width: 70px;
+}
+
+.feature__header {
+    display: grid;
+    grid-gap: 1em;
+    justify-items: center;
+    text-transform: uppercase;
+}
+
+.feature__text {
+    justify-items: center;
+    text-align: center;
+}
+
+.feature1 {
+    grid-row: 2 / span 3;
+    grid-column: 1 / span 1;
+}
+
+.feature2 {
+    grid-row: 1 / span 3;
+    grid-column: 2 / span 1;
+}
+
+.feature3 {
+    grid-row: 4 / span 3;
+    grid-column: 2 / span 1;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+@include small {
+    body {
+        font-size: 0.8em;
+    }
+
+    .features {
+        grid-template-columns: 1fr;
+    }
+
+    .feature {
+        display:grid;
+        grid-template-rows: 2fr 1fr;
+        grid-row: auto;
+        grid-column: auto;
+    }
+
+    .feature h2 {
+        grid-template-columns: 1fr;
+        justify-items: center;
+    }
+
+    .intro {
+        grid-template-columns: repeat( auto-fill, minmax(100px, 1fr) );
+        grid-template-rows: auto minmax(50px, 100px);
+        grid-auto-rows: 100px;
+    }
+
+    .user {
+        grid-row: auto;
+        grid-column: auto;
+    }
+
+    .intro h1 {
+        grid-column: 1 / -1;
+        grid-row: auto;
+    }
+}
+
+@include medium {
+    .intro h1 {
+        padding: 1em;
+      }
+}
