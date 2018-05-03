@@ -439,7 +439,7 @@ h1, h2, h3, h4 {
       -ms-flex-align: center;
           align-items: center;
   padding: 0.8em;
-  justify-self: center; }
+  margin: 0 auto; }
 
 .homepage .logo {
   justify-self: start; }
@@ -463,7 +463,7 @@ h1, h2, h3, h4 {
   grid-row: 1 / span 2;
   font-family: "Slabo 13px", serif;
   font-weight: normal;
-  font-size: 2.2em;
+  font-size: 2em;
   line-height: 1.3em; }
 
 .user1 {
@@ -598,4 +598,5 @@ h1, h2, h3, h4 {
 
 @media only screen and (max-width: 64em) {
   .intro h1 {
-    padding: 1em; } }
+    padding: 0.8em;
+    font-size: 1.8em; } }
